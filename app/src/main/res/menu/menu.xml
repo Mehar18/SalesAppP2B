@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/DashBoard_menu"
+        android:title="Dashboard"
+        android:icon="@drawable/dashboard"/>
+
+    <item
+        android:id="@+id/coupon_menu"
+        android:title="Coupon"
+        android:icon="@drawable/coupon_icon"
+        />
+
+    <item
+        android:id="@+id/reports_menu"
+        android:title="Report"
+        android:icon="@drawable/report_icon"
+        />
+
+    <item
+        android:id="@+id/leads_menu"
+        android:title="Leads"
+        android:icon="@drawable/leads_icon"
+        />
+
+    <item
+        android:id="@+id/leadStatus_menu"
+        android:title="Lead Status"
+        android:icon="@drawable/leadstatus_icon"
+        />
+
+    <item
+        android:id="@+id/dailyReport_menu"
+        android:title="Daily Report"
+        android:icon="@drawable/dailyreport"
+        />
+
+    <item
+        android:id="@+id/logOut_menu"
+        android:title="log out"
+        android:icon="@drawable/log_out"
+        />
+</menu>
