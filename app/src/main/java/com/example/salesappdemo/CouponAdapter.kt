@@ -1,21 +1,17 @@
 package com.example.salesappdemo
 
-import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.example.salesappdemo.couponAdapter.*
 import com.example.salesappdemo.data.ModelCouponDataClass
 
 
-class couponAdapter (private val couponList: ArrayList<ModelCouponDataClass>) :RecyclerView.Adapter<couponAdapter.RowViewHolder>() {
+class CouponAdapter (private val couponList: ArrayList<ModelCouponDataClass>) :RecyclerView.Adapter<CouponAdapter.RowViewHolder>() {
+  //  private val couponList: ArrayList<ModelCouponDataClass> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RowViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.coupon_table_list, parent, false)
@@ -93,21 +89,27 @@ class couponAdapter (private val couponList: ArrayList<ModelCouponDataClass>) :R
             }
         }
 
-//        holder.editBtn.setOnClickListener {
-//
-//            val activity = it.context as AppCompatActivity
-//            val fragment = AddRecordCouponFragment()
-//            activity.supportFragmentManager.beginTransaction().
-//            replace(R.id.container,fragment).addToBackStack(null).commit()
-//
-//
-//        }
+        holder.editBtn.setOnClickListener {
+
+            val activity = it.context as AppCompatActivity
+            val fragment = AddRecordCouponFragment()
+            activity.supportFragmentManager.beginTransaction().
+            replace(R.id.container,fragment).addToBackStack(null).commit()
+
+
+        }
 
 
     }
 
     override fun getItemCount(): Int {
         return couponList.size + 1 // one more to add header row
+    }
+
+    fun updateCoupon(update:ArrayList<ModelCouponDataClass>){
+        couponList.clear()
+        couponList.addAll(update)
+        notifyDataSetChanged()
     }
 
 

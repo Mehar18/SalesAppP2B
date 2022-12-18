@@ -1,7 +1,6 @@
 package com.example.salesappdemo
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +12,9 @@ import com.example.salesappdemo.data.ModelCouponDataClass
 
 
 
-class couponFragment : Fragment() {
+class CouponFragment : Fragment() {
 //    lateinit var addRecordButton: Button
-
+var typeS : String? = null
 
 
     override fun onCreateView(
@@ -26,7 +25,7 @@ class couponFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_coupon, container, false)
         val recyclerViewCoupon = view.findViewById<RecyclerView>(R.id.recyclerViewCoupon)
         recyclerViewCoupon.layoutManager = LinearLayoutManager(requireContext())
-        recyclerViewCoupon.adapter = couponAdapter(couponList)
+        recyclerViewCoupon.adapter = CouponAdapter(couponList)
 
         val addRecordButton : Button = view.findViewById(R.id.newrecordBtn)
 
@@ -42,7 +41,7 @@ class couponFragment : Fragment() {
 //        editButton.setOnClickListener {
 //            val fragment = AddRecordCouponFragment()
 //            loadFragment(fragment)
-  //      }
+        //      }
 
         return view
     }
@@ -71,4 +70,3 @@ class couponFragment : Fragment() {
         transaction.commit()
     }
 }
-

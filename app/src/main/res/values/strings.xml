@@ -10,4 +10,5 @@
     <string name="card">Card :</string>
     <string name="sales_percentage">sales percentage -</string>
     <string name="day_s_remaining">day(s) remaining</string>
+    <string name="submit">Submit</string>
 </resources>
