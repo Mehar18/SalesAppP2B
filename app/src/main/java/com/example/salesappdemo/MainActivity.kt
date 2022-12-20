@@ -11,6 +11,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.salesappdemo.R.id.navigationView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
     lateinit var drawerLayout: DrawerLayout
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         setContentView(R.layout.activity_main)
 
 
+
+
+
         val fragment = DashBoardFragment()
         loadFragment(fragment)
 
@@ -29,6 +34,9 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         toolbar = findViewById(R.id.toolbar)
         toolbar.setTitle("Dash Board")
         setSupportActionBar(toolbar)
+
+
+
 
         prefManager = PrefManager(this)
 
@@ -60,6 +68,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             R.id.DashBoard_menu -> {
                 val fragment = DashBoardFragment()
                 loadFragment(fragment)
+                toolbar.setTitle("Dash board")
+
 
 //                drawerLayout.close()
             }

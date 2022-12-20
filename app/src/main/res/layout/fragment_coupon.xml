@@ -31,7 +31,6 @@
 
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCoupon"
         android:layout_width="match_parent"

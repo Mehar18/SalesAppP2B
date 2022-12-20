@@ -8,13 +8,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.salesappdemo.data.ModelCouponDataClass
-
+import com.example.salesappdemo.data.CouponDataBase
+import com.google.firebase.database.*
 
 
 class CouponFragment : Fragment() {
 //    lateinit var addRecordButton: Button
-var typeS : String? = null
+    private lateinit var couponArrayList  : ArrayList<CouponDataBase>
+    private lateinit var dbRefernceCoupon : DatabaseReference
+    private lateinit var recyclerViewCoupon : RecyclerView
 
 
     override fun onCreateView(
@@ -23,9 +25,12 @@ var typeS : String? = null
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_coupon, container, false)
-        val recyclerViewCoupon = view.findViewById<RecyclerView>(R.id.recyclerViewCoupon)
+        recyclerViewCoupon = view.findViewById<RecyclerView>(R.id.recyclerViewCoupon)
         recyclerViewCoupon.layoutManager = LinearLayoutManager(requireContext())
         recyclerViewCoupon.adapter = CouponAdapter(couponList)
+
+        couponArrayList = arrayListOf<CouponDataBase>()
+        getCouponListDate()
 
         val addRecordButton : Button = view.findViewById(R.id.newrecordBtn)
 
@@ -46,17 +51,41 @@ var typeS : String? = null
         return view
     }
 
+    private fun getCouponListDate() {
+
+        dbRefernceCoupon = FirebaseDatabase.getInstance().getReference("Add coupon")
+        dbRefernceCoupon.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (codeSnap in snapshot.children){  //getting data from firebase - snapshot.children
+                        val codeData = codeSnap.getValue(CouponDataBase::class.java)
+                        couponArrayList.add(codeData!!)
+
+                    }
+                    val codeAdapter = CouponAdapter(couponArrayList)
+                    recyclerViewCoupon.adapter = codeAdapter
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                couponArrayList.clear()
+
+            }
+
+        })
+
+    }
 
 
-
-
-    private val couponList = ArrayList<ModelCouponDataClass>().apply{
-        add(ModelCouponDataClass("DIVYA14","fixed",2000,
-            "python certification and data structure ","vishwa priya",
-            "1","Yes","",1))
-        add(ModelCouponDataClass("DIVYA14","fixed",2000,
-            "python certification and data structure ","vishwa priya",
-            "1","Yes","",1))
+    private val couponList = ArrayList<CouponDataBase>().apply{
+//        add(ModelCouponDataClass("DIVYA14","fixed",2000,
+//            "python certification and data structure ","vishwa priya",
+//            "1","Yes","",1))
+//        add(ModelCouponDataClass("DIVYA14","fixed",2000,
+//            "python certification and data structure ","vishwa priya",
+//            "1","Yes","",1))
 
 
 

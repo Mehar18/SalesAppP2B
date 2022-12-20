@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "276162804118",
+    "project_id": "salesappp2b",
+    "storage_bucket": "salesappp2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276162804118:android:ab81ed5bf1cba92dad85b7",
+        "android_client_info": {
+          "package_name": "com.example.salesappdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276162804118-b0268a04keng9od60n2m85vgss545g3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF-LGSclMCcEfGy67DB0v8ryr8v1skySE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276162804118-b0268a04keng9od60n2m85vgss545g3e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

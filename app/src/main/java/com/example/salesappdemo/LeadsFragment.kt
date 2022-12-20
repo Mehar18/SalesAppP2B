@@ -1,11 +1,15 @@
 package com.example.salesappdemo
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.salesappdemo.data.ModelLeadsDataClass
@@ -22,6 +26,14 @@ class LeadsFragment : Fragment() {
         val recyclerViewLeads = view.findViewById<RecyclerView>(R.id.recyclerViewLeads)
         recyclerViewLeads.layoutManager = LinearLayoutManager(requireContext())
         recyclerViewLeads.adapter = LeadsAdapter(LeadsList)
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(requireActivity(),
+                arrayOf(Manifest.permission.CALL_PHONE), Companion.PERMISSION_CODE
+            )
+
+        }
 
         val NewRecordButton: Button = view.findViewById(R.id.newRecordBtn)
         NewRecordButton.setOnClickListener {
@@ -44,6 +56,10 @@ class LeadsFragment : Fragment() {
         transaction.replace(R.id.container,fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    companion object {
+        const val PERMISSION_CODE= 100
     }
 
 }

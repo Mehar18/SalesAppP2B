@@ -23,6 +23,7 @@ import java.security.AccessController
 
 class LeadsAdapter(private val LeadList: ArrayList<ModelLeadsDataClass>) : RecyclerView.Adapter<LeadsAdapter.RowViewHolder>(){
 
+    lateinit var mobileString: String
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RowViewHolder {
 
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.leads_table_list, parent, false)
@@ -104,8 +105,15 @@ class LeadsAdapter(private val LeadList: ArrayList<ModelLeadsDataClass>) : Recyc
 
         }
 
+
+
         holder.MobileTxt.setOnClickListener {
-            val mobileString : String = holder.MobileTxt.toString()
+
+            mobileString = holder.MobileTxt.text.toString()
+            val callIntent = Intent(Intent.ACTION_CALL)
+            callIntent.setData(Uri.parse("tel:$mobileString"))
+            startActivity(it.context,callIntent,null)
+
 
         }
 

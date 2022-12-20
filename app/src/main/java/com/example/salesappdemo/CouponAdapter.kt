@@ -4,13 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.salesappdemo.data.ModelCouponDataClass
+import com.example.salesappdemo.data.CouponDataBase
 
 
-class CouponAdapter (private val couponList: ArrayList<ModelCouponDataClass>) :RecyclerView.Adapter<CouponAdapter.RowViewHolder>() {
+class CouponAdapter (private val couponList: ArrayList<CouponDataBase>) :RecyclerView.Adapter<CouponAdapter.RowViewHolder>() {
   //  private val couponList: ArrayList<ModelCouponDataClass> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RowViewHolder {
@@ -76,16 +77,16 @@ class CouponAdapter (private val couponList: ArrayList<ModelCouponDataClass>) :R
                 setContentBg(txtStatus)
                 setContentBg(txtMaxUsage)
 
-                txtc.text = modal.coupon
+                txtc.text = modal.code
                 txtT.text = modal.type
                 txtA.text = modal.amount.toString()
                 txtcourse.text = modal.course
 
                 txtEmployee.text = modal.employee
-                txtAddedBy.text = modal.AddedBy
-                txtUsed.text = modal.used
-                txtStatus.text = modal.status
-                txtMaxUsage.text = modal.maxUsage.toString()
+                txtAddedBy.text = ""
+                txtUsed.text = ""
+                txtStatus.text = ""
+                txtMaxUsage.text = "0"
             }
         }
 
@@ -106,11 +107,11 @@ class CouponAdapter (private val couponList: ArrayList<ModelCouponDataClass>) :R
         return couponList.size + 1 // one more to add header row
     }
 
-    fun updateCoupon(update:ArrayList<ModelCouponDataClass>){
-        couponList.clear()
-        couponList.addAll(update)
-        notifyDataSetChanged()
-    }
+//    fun updateCoupon(update:ArrayList<ModelCouponDataClass>){
+//        couponList.clear()
+//        couponList.addAll(update)
+//        notifyDataSetChanged()
+//    }
 
 
 
