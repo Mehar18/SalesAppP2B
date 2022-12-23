@@ -99,8 +99,8 @@ class LeadsAdapter(private val LeadList: ArrayList<ModelLeadsDataClass>) : Recyc
 
             val activity = it.context as AppCompatActivity
             val fragment = LeadsNewRecordFRagment()
-            activity.supportFragmentManager.beginTransaction().
-            replace(R.id.container,fragment).addToBackStack(null).commit()
+            activity.supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
+                .addToBackStack(null).commit()
 
 
         }
@@ -112,7 +112,13 @@ class LeadsAdapter(private val LeadList: ArrayList<ModelLeadsDataClass>) : Recyc
             mobileString = holder.MobileTxt.text.toString()
             val callIntent = Intent(Intent.ACTION_CALL)
             callIntent.setData(Uri.parse("tel:$mobileString"))
-            startActivity(it.context,callIntent,null)
+            startActivity(it.context, callIntent, null)
+
+
+            val activity = it.context as AppCompatActivity
+            val fragment = LeadsNewRecordFRagment()
+            activity.supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
+                .addToBackStack(null).commit()
 
 
         }

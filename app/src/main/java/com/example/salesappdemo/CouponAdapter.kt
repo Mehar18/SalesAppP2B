@@ -3,7 +3,6 @@ package com.example.salesappdemo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.salesappdemo.data.CouponDataBase
 
 
-class CouponAdapter (private val couponList: ArrayList<CouponDataBase>) :RecyclerView.Adapter<CouponAdapter.RowViewHolder>() {
+class CouponAdapter(private var couponList: ArrayList<CouponDataBase>) :RecyclerView.Adapter<CouponAdapter.RowViewHolder>() {
   //  private val couponList: ArrayList<ModelCouponDataClass> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RowViewHolder {
@@ -22,75 +21,88 @@ class CouponAdapter (private val couponList: ArrayList<CouponDataBase>) :Recycle
 
 
 
-    private fun setHeaderBg(view: View) {
-        view.setBackgroundResource(R.drawable.table_header_cell_bg)
-    }
 
-    private fun setContentBg(view: View) {
-        view.setBackgroundResource(R.drawable.table_content_cell_bg)
-    }
+//    private fun setHeaderBg(view: View) {
+//        view.setBackgroundResource(R.drawable.table_header_cell_bg)
+//    }
+//
+//    private fun setContentBg(view: View) {
+//        view.setBackgroundResource(R.drawable.table_content_cell_bg)
+//    }
 
     override fun onBindViewHolder(holder: RowViewHolder, position: Int) {
-        val rowPosition = holder.adapterPosition
+        val currentPosition = couponList[position]
+        holder.txtc.text = currentPosition.code
+        holder.txtT.text = currentPosition.type
+        holder.txtA.text = currentPosition.amount.toString()
+        holder.txtcourse.text = currentPosition.course
+        holder.txtEmployee.text=currentPosition.employee
+       // holder.txtAddedBy.text = currentPosition.
+       // holder.txtUsed.text = currentPosition.
+        //holder.txtStatus
+        //holder.txtMaxUsage
+       // val rowPosition = holder.adapterPosition
 
-        if (rowPosition == 0) {
-            // Header Cells. Main Headings appear here
-            holder.apply {
-                setHeaderBg(txtA)
-                setHeaderBg(txtT)
-                setHeaderBg(txtc)
-                setHeaderBg(txtcourse)
+//        if (rowPosition == 0) {
+//            // Header Cells. Main Headings appear here
+//            holder.apply {
+//                setHeaderBg(txtA)
+//                setHeaderBg(txtT)
+//                setHeaderBg(txtc)
+//                setHeaderBg(txtcourse)
+//
+//                setHeaderBg(txtEmployee)
+//                setHeaderBg(txtAddedBy)
+//                setHeaderBg(txtUsed)
+//                setHeaderBg(txtStatus)
+//                setHeaderBg(txtMaxUsage)
+//
+//
+//
+//
+//                txtA.text = "Amount"
+//                txtT.text = "Type"
+//                txtc.text = "coupon"
+//                txtcourse.text = "Course"
+//
+//                txtEmployee.text = "Employee"
+//                txtAddedBy.text = "Added By"
+//                txtUsed.text = "Used"
+//                txtStatus.text = "Status"
+//                txtMaxUsage.text = "Max Usage"
+//                editBtn.setBackgroundResource(0)
+//            }
+//        } else {
+         //   val modal = couponList[rowPosition]
 
-                setHeaderBg(txtEmployee)
-                setHeaderBg(txtAddedBy)
-                setHeaderBg(txtUsed)
-                setHeaderBg(txtStatus)
-                setHeaderBg(txtMaxUsage)
+           // holder.apply {
+//                setContentBg(txtc)
+//                setContentBg(txtA)
+//                setContentBg(txtcourse)
+//                setContentBg(txtT)
+//
+//                setContentBg(txtEmployee)
+//                setContentBg(txtAddedBy)
+//                setContentBg(txtUsed)
+//                setContentBg(txtStatus)
+//                setContentBg(txtMaxUsage)
+//
+//                txtc.text = modal.code
+//                txtT.text = modal.type
+//                txtA.text = modal.amount.toString()
+//                txtcourse.text = modal.course
+//
+//                txtEmployee.text = modal.employee
+//                txtAddedBy.text = ""
+//                txtUsed.text = ""
+//                txtStatus.text = ""
+//                txtMaxUsage.text = "0"
+           // }
+
+        //}
 
 
-
-
-                txtA.text = "Amount"
-                txtT.text = "Type"
-                txtc.text = "coupon"
-                txtcourse.text = "Course"
-
-                txtEmployee.text = "Employee"
-                txtAddedBy.text = "Added By"
-                txtUsed.text = "Used"
-                txtStatus.text = "Status"
-                txtMaxUsage.text = "Max Usage"
-                editBtn.setBackgroundResource(0)
-            }
-        } else {
-            val modal = couponList[rowPosition - 1]
-
-            holder.apply {
-                setContentBg(txtc)
-                setContentBg(txtA)
-                setContentBg(txtcourse)
-                setContentBg(txtT)
-
-                setContentBg(txtEmployee)
-                setContentBg(txtAddedBy)
-                setContentBg(txtUsed)
-                setContentBg(txtStatus)
-                setContentBg(txtMaxUsage)
-
-                txtc.text = modal.code
-                txtT.text = modal.type
-                txtA.text = modal.amount.toString()
-                txtcourse.text = modal.course
-
-                txtEmployee.text = modal.employee
-                txtAddedBy.text = ""
-                txtUsed.text = ""
-                txtStatus.text = ""
-                txtMaxUsage.text = "0"
-            }
-        }
-
-        holder.editBtn.setOnClickListener {
+        holder.editImg.setOnClickListener {
 
             val activity = it.context as AppCompatActivity
             val fragment = AddRecordCouponFragment()
@@ -98,13 +110,32 @@ class CouponAdapter (private val couponList: ArrayList<CouponDataBase>) :Recycle
             replace(R.id.container,fragment).addToBackStack(null).commit()
 
 
+
+        }
+        holder.imgThumbStatus.setImageResource(R.drawable.ic_baseline_thumb_up_alt_24)
+        holder.imgThumbStatus.setTag(R.drawable.ic_baseline_thumb_up_alt_24)
+
+        holder.imgThumbStatus.setOnClickListener{
+            if (holder.imgThumbStatus.getTag() ==R.drawable.ic_baseline_thumb_up_alt_24){
+                holder.imgThumbStatus.setImageResource(R.drawable.ic_baseline_thumb_down_alt_24)
+                holder.imgThumbStatus.setTag(R.drawable.ic_baseline_thumb_down_alt_24)
+            }else{
+                holder.imgThumbStatus.setImageResource(R.drawable.ic_baseline_thumb_up_alt_24)
+                holder.imgThumbStatus.setTag(R.drawable.ic_baseline_thumb_up_alt_24)
+            }
         }
 
 
     }
 
     override fun getItemCount(): Int {
-        return couponList.size + 1 // one more to add header row
+        return couponList.size // one more to add header row
+    }
+
+    fun filterList(filterlist: ArrayList<CouponDataBase>) {
+
+        this.couponList = filterlist
+        notifyDataSetChanged()
     }
 
 //    fun updateCoupon(update:ArrayList<ModelCouponDataClass>){
@@ -123,10 +154,13 @@ class CouponAdapter (private val couponList: ArrayList<CouponDataBase>) :Recycle
         val txtEmployee: TextView = itemView.findViewById(R.id.txtEmployeeCoupon)
         val txtAddedBy: TextView = itemView.findViewById(R.id.txtAddedByCoupon)
         val txtUsed: TextView = itemView.findViewById(R.id.txtUsedCoupon)
-        val txtStatus: TextView = itemView.findViewById(R.id.StatusCoupon)
+        val imgThumbStatus: ImageView = itemView.findViewById(R.id.StatusCoupon)
         val txtMaxUsage: TextView = itemView.findViewById(R.id.txtMaxUsage)
-        var editBtn : Button = itemView.findViewById(R.id.editBtnCoupon)
+        var editImg : ImageView = itemView.findViewById(R.id.editImgCoupon)
 
+    }
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
     }
 
 //    private fun loadFragment(fragment: Fragment) {

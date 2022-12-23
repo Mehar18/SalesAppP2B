@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.salesappdemo.data.CouponDataBase
 import com.google.firebase.database.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CouponFragment : Fragment() {
@@ -17,6 +21,9 @@ class CouponFragment : Fragment() {
     private lateinit var couponArrayList  : ArrayList<CouponDataBase>
     private lateinit var dbRefernceCoupon : DatabaseReference
     private lateinit var recyclerViewCoupon : RecyclerView
+    lateinit var edtImg : ImageView
+    lateinit var searchCoupon: SearchView
+    private lateinit var madapter: CouponAdapter
 
 
     override fun onCreateView(
@@ -28,7 +35,9 @@ class CouponFragment : Fragment() {
         recyclerViewCoupon = view.findViewById<RecyclerView>(R.id.recyclerViewCoupon)
         recyclerViewCoupon.layoutManager = LinearLayoutManager(requireContext())
         recyclerViewCoupon.adapter = CouponAdapter(couponList)
-
+        madapter = CouponAdapter(couponList)
+     //   recyclerViewCoupon.layoutManager =
+//            //
         couponArrayList = arrayListOf<CouponDataBase>()
         getCouponListDate()
 
@@ -39,17 +48,44 @@ class CouponFragment : Fragment() {
             loadFragment(fragment)
         }
 
+        searchCoupon = view.findViewById(R.id.searchCoupon)
+        searchCoupon.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
 
-//        editButton = recyclerViewCoupon.findViewById(R.id.editBtnCoupon)
-//
-//
-//        editButton.setOnClickListener {
-//            val fragment = AddRecordCouponFragment()
-//            loadFragment(fragment)
-        //      }
+
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                couponFilter(newText)
+                return false
+            }
+
+        })
+
 
         return view
     }
+
+    private fun couponFilter(newText: String?) {
+        val couponFilterList: ArrayList<CouponDataBase> = ArrayList()
+        for (item in couponArrayList) {
+            if (item.code.toLowerCase(Locale.ROOT).trim()
+                    .contains(newText?.toLowerCase(Locale.ROOT)!!.trim())
+            ) {
+                couponFilterList.add(item)
+            }
+        }
+        if (couponFilterList.isEmpty()) {
+        } else {
+            madapter.filterList(couponFilterList)
+
+
+        }
+    }
+
+
 
     private fun getCouponListDate() {
 

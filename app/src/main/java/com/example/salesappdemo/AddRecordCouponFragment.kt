@@ -59,6 +59,7 @@ class AddRecordCouponFragment : Fragment() {
 
         //array for courses
         coursesArrayList.add("--Select--")
+        coursesArrayList.add("Complete full stack development")
 
         //submit button click
             submitButton.setOnClickListener {
