@@ -63,12 +63,8 @@ class AddRecordCouponFragment : Fragment() {
 
         //submit button click
             submitButton.setOnClickListener {
-            val fragment = CouponFragment()
-//            val bundle = Bundle()
-//            bundle.putString("type",selectedItemString)
-//            arrayCoupon.add(ModelCouponDataClass("",selectedItemString,
-//                0,"","","","","",1))
-//            couponAdapter.updateCoupon
+//            val fragment = CouponFragment()
+//                loadFragment(fragment)
                 //type spinner
                 val couponEdt: TextInputEditText = view.findViewById(R.id.couponCode)
                 val amountEdt: TextInputEditText = view.findViewById(R.id.AmountEdt)
@@ -85,6 +81,10 @@ class AddRecordCouponFragment : Fragment() {
                 val startDateString=startDateEdt.text.toString()
                 val expiryDateString = expiryByEdt.text.toString()
                 //val courseString = selectedItemStringEmployee
+                val bundle = Bundle()
+
+
+
 
 
 
@@ -96,7 +96,7 @@ class AddRecordCouponFragment : Fragment() {
 //
 
 
-            loadFragment(fragment)
+
 
 
 

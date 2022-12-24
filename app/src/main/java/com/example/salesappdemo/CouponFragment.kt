@@ -1,6 +1,7 @@
 package com.example.salesappdemo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,8 @@ class CouponFragment : Fragment() {
     private lateinit var dbRefernceCoupon : DatabaseReference
     private lateinit var recyclerViewCoupon : RecyclerView
     lateinit var edtImg : ImageView
+
+    var codeString: String? = null
     lateinit var searchCoupon: SearchView
     private lateinit var madapter: CouponAdapter
 
@@ -36,8 +39,6 @@ class CouponFragment : Fragment() {
         recyclerViewCoupon.layoutManager = LinearLayoutManager(requireContext())
         recyclerViewCoupon.adapter = CouponAdapter(couponList)
         madapter = CouponAdapter(couponList)
-     //   recyclerViewCoupon.layoutManager =
-//            //
         couponArrayList = arrayListOf<CouponDataBase>()
         getCouponListDate()
 
@@ -51,14 +52,16 @@ class CouponFragment : Fragment() {
         searchCoupon = view.findViewById(R.id.searchCoupon)
         searchCoupon.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+                couponFilter(query)
+                return true
 
 
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                couponFilter(newText)
+               // couponFilter(newText)
+                Log.d("code",couponArrayList.toString())
                 return false
             }
 
@@ -70,19 +73,28 @@ class CouponFragment : Fragment() {
 
     private fun couponFilter(newText: String?) {
         val couponFilterList: ArrayList<CouponDataBase> = ArrayList()
+        Log.d("cod",couponArrayList.toString())
+
         for (item in couponArrayList) {
             if (item.code.toLowerCase(Locale.ROOT).trim()
                     .contains(newText?.toLowerCase(Locale.ROOT)!!.trim())
             ) {
+
+
                 couponFilterList.add(item)
+                Log.d("co",item.toString())
+                madapter.filterList(couponFilterList)
+
             }
+//            madapter.filterList(couponFilterList)
         }
         if (couponFilterList.isEmpty()) {
         } else {
-            madapter.filterList(couponFilterList)
+            madapter.filterList(couponArrayList)
 
 
         }
+        madapter.filterList(couponFilterList)
     }
 
 
@@ -106,7 +118,7 @@ class CouponFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                couponArrayList.clear()
+               // couponArrayList.clear()
 
             }
 
