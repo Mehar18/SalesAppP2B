@@ -11,6 +11,7 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.salesappdemo.data.CouponDataBase
 import com.google.firebase.database.*
 import java.util.*
@@ -36,9 +37,10 @@ class CouponFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_coupon, container, false)
         recyclerViewCoupon = view.findViewById<RecyclerView>(R.id.recyclerViewCoupon)
-        recyclerViewCoupon.layoutManager = LinearLayoutManager(requireContext())
-        recyclerViewCoupon.adapter = CouponAdapter(couponList)
-        madapter = CouponAdapter(couponList)
+        recyclerViewCoupon.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+        madapter = CouponAdapter()
+        recyclerViewCoupon.adapter = madapter
+
         couponArrayList = arrayListOf<CouponDataBase>()
         getCouponListDate()
 
@@ -52,17 +54,17 @@ class CouponFragment : Fragment() {
         searchCoupon = view.findViewById(R.id.searchCoupon)
         searchCoupon.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                couponFilter(query)
-                return true
+//                couponFilter(query)
+                return false
 
 
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-               // couponFilter(newText)
+                couponFilter(newText)
                 Log.d("code",couponArrayList.toString())
-                return false
+                return true
             }
 
         })
@@ -79,8 +81,6 @@ class CouponFragment : Fragment() {
             if (item.code.toLowerCase(Locale.ROOT).trim()
                     .contains(newText?.toLowerCase(Locale.ROOT)!!.trim())
             ) {
-
-
                 couponFilterList.add(item)
                 Log.d("co",item.toString())
                 madapter.filterList(couponFilterList)
@@ -88,12 +88,12 @@ class CouponFragment : Fragment() {
             }
 //            madapter.filterList(couponFilterList)
         }
-        if (couponFilterList.isEmpty()) {
-        } else {
-            madapter.filterList(couponArrayList)
-
-
-        }
+//        if (couponFilterList.isEmpty()) {
+//        } else {
+//            madapter.filterList(couponArrayList)
+//
+//
+//        }
         madapter.filterList(couponFilterList)
     }
 
@@ -110,8 +110,11 @@ class CouponFragment : Fragment() {
                         couponArrayList.add(codeData!!)
 
                     }
-                    val codeAdapter = CouponAdapter(couponArrayList)
-                    recyclerViewCoupon.adapter = codeAdapter
+//                    val codeAdapter = CouponAdapter()
+                    madapter = CouponAdapter()
+                    recyclerViewCoupon.adapter = madapter
+                    madapter.filterList(couponArrayList)
+
 
                 }
 
@@ -127,18 +130,18 @@ class CouponFragment : Fragment() {
     }
 
 
-    private val couponList = ArrayList<CouponDataBase>().apply{
-//        add(ModelCouponDataClass("DIVYA14","fixed",2000,
-//            "python certification and data structure ","vishwa priya",
-//            "1","Yes","",1))
-//        add(ModelCouponDataClass("DIVYA14","fixed",2000,
-//            "python certification and data structure ","vishwa priya",
-//            "1","Yes","",1))
-
-
-
-
-    }
+//    private val couponList = ArrayList<CouponDataBase>().apply{
+////        add(ModelCouponDataClass("DIVYA14","fixed",2000,
+////            "python certification and data structure ","vishwa priya",
+////            "1","Yes","",1))
+////        add(ModelCouponDataClass("DIVYA14","fixed",2000,
+////            "python certification and data structure ","vishwa priya",
+////            "1","Yes","",1))
+//
+//
+//
+//
+//    }
 
     private  fun loadFragment(fragment: Fragment){
         val transaction = requireActivity().supportFragmentManager.beginTransaction()

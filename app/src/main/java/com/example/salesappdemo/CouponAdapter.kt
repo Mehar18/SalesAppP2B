@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.salesappdemo.data.CouponDataBase
 
 
-class CouponAdapter(private var couponList: ArrayList<CouponDataBase>) :RecyclerView.Adapter<CouponAdapter.RowViewHolder>() {
+class CouponAdapter() :RecyclerView.Adapter<CouponAdapter.RowViewHolder>() {
   //  private val couponList: ArrayList<ModelCouponDataClass> = ArrayList()
-
+  private var couponList: ArrayList<CouponDataBase> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RowViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.coupon_table_list, parent, false)
         return RowViewHolder(itemView)
