@@ -42,7 +42,7 @@ class CouponFragment : Fragment() {
         recyclerViewCoupon.adapter = madapter
 
         couponArrayList = arrayListOf<CouponDataBase>()
-        getCouponListDate()
+        getCouponListData()
 
         val addRecordButton : Button = view.findViewById(R.id.newrecordBtn)
 
@@ -63,7 +63,7 @@ class CouponFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
 
                 couponFilter(newText)
-                Log.d("code",couponArrayList.toString())
+              //  Log.d("code",couponArrayList.toString())
                 return true
             }
 
@@ -82,24 +82,19 @@ class CouponFragment : Fragment() {
                     .contains(newText?.toLowerCase(Locale.ROOT)!!.trim())
             ) {
                 couponFilterList.add(item)
-                Log.d("co",item.toString())
+              //  Log.d("co",item.toString())
                 madapter.filterList(couponFilterList)
 
             }
 //            madapter.filterList(couponFilterList)
         }
-//        if (couponFilterList.isEmpty()) {
-//        } else {
-//            madapter.filterList(couponArrayList)
-//
-//
 //        }
         madapter.filterList(couponFilterList)
     }
 
 
 
-    private fun getCouponListDate() {
+    private fun getCouponListData() {
 
         dbRefernceCoupon = FirebaseDatabase.getInstance().getReference("Add coupon")
         dbRefernceCoupon.addValueEventListener(object : ValueEventListener{

@@ -73,7 +73,7 @@
         android:gravity="center"
         android:background="@drawable/table_content_cell_bg"
         android:layout_height="match_parent"
-        android:text="Amount"
+        android:text="Used"
         android:textSize="18sp" />
 
     <LinearLayout

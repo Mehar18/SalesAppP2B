@@ -3,6 +3,7 @@ package com.example.salesappdemo
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Button
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -19,11 +20,10 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     lateinit var Navigationview: NavigationView
     lateinit var prefManager: PrefManager
     lateinit var toolbar: Toolbar
+    lateinit var checkInbtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
 
 
 
@@ -35,16 +35,29 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         toolbar.setTitle("Dash Board")
         setSupportActionBar(toolbar)
 
+        checkInbtn = findViewById(R.id.checkInBtn)
 
+        checkInbtn.setText("Check out")
+        checkInbtn.setTag("Check out")
+
+        checkInbtn.setOnClickListener {
+
+            if (checkInbtn.getTag() == "Check out"){
+                checkInbtn.setText("Check in")
+                checkInbtn.setTag("Check in")
+            }else{
+                checkInbtn.setText("Check out")
+                checkInbtn.setTag("Check out")
+
+            }
+
+
+        }
 
 
         prefManager = PrefManager(this)
-
-
-
         drawerLayout = findViewById(R.id.drawerlayout)
         Navigationview = findViewById(navigationView)
-
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, 0, 0
         )
