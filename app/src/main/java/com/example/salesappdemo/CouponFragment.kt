@@ -125,19 +125,6 @@ class CouponFragment : Fragment() {
     }
 
 
-//    private val couponList = ArrayList<CouponDataBase>().apply{
-////        add(ModelCouponDataClass("DIVYA14","fixed",2000,
-////            "python certification and data structure ","vishwa priya",
-////            "1","Yes","",1))
-////        add(ModelCouponDataClass("DIVYA14","fixed",2000,
-////            "python certification and data structure ","vishwa priya",
-////            "1","Yes","",1))
-//
-//
-//
-//
-//    }
-
     private  fun loadFragment(fragment: Fragment){
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container,fragment)

@@ -3,10 +3,16 @@ package com.example.salesappdemo
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -17,6 +23,8 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
     lateinit var drawerLayout: DrawerLayout
+    lateinit var headerLayout:Layout
+    lateinit var profileImg:ImageView
     lateinit var Navigationview: NavigationView
     lateinit var prefManager: PrefManager
     lateinit var toolbar: Toolbar
@@ -57,7 +65,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         prefManager = PrefManager(this)
         drawerLayout = findViewById(R.id.drawerlayout)
-        Navigationview = findViewById(navigationView)
+        Navigationview = findViewById(R.id.navigationView)
+
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, 0, 0
         )
@@ -67,7 +76,32 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         Navigationview.setNavigationItemSelectedListener(this)
 
-        Navigationview.getHeaderView(0).setOnClickListener{
+
+       Navigationview.getHeaderView(0).setOnClickListener{
+
+           profileImg = findViewById(R.id.profileImage)
+           profileImg.setOnClickListener {
+
+               val builder = AlertDialog.Builder(this)
+                   .create()
+               val view = layoutInflater.inflate(R.layout.profile_dialogue,null)
+               val firstName:TextView = view.findViewById(R.id.userName)
+               builder.setView(view)
+               builder.setCanceledOnTouchOutside(true)
+               builder.show()
+               drawerLayout.closeDrawer(GravityCompat.START)
+               val profileName : TextView = view.findViewById(R.id.myProfileTxt)
+               profileName.setOnClickListener{
+                   builder.dismiss()
+                   val fragment = Profile_Fragment()
+                   loadFragment(fragment)
+
+
+               }
+
+
+           }
+
 
         }
 
@@ -91,6 +125,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 prefManager.setLogin(false)
                 val intent = Intent(this@MainActivity,LoginActivity::class.java)
                 overridePendingTransition(0,0)
+                intent.putExtra("suc","Success!!")
+                intent.putExtra("log","Logged out successfully")
                 startActivity(intent)
                 finish()
             }
@@ -111,6 +147,11 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 val fragment = LeadsFragment()
                 loadFragment(fragment)
                 toolbar.setTitle("Leads")
+            }
+            R.id.leadStatus_menu->{
+                val fragment = LeadStatus()
+                loadFragment(fragment)
+                toolbar.setTitle("Leads status")
             }
         }
 

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context=".Profile_Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Profile"
+            android:textSize="24dp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:layout_marginTop="40dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="First name"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="first name"
+                android:id="@+id/firstNameProfileEdt"
+                android:textSize="25dp"
+                android:background="@drawable/border"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Last name"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="last name"
+                android:id="@+id/lastNameProfileEdt"
+                android:textSize="25dp"
+                android:background="@drawable/border"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Phone"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="last name"
+                android:id="@+id/phoneProfileEdt"
+                android:inputType="number"
+                android:textSize="25dp"
+                android:background="@drawable/border"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Email"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="email"
+                android:inputType="number"
+                android:id="@+id/emailProfileEdt"
+                android:textSize="25dp"
+                android:background="@drawable/border"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#CAC9CC"
+                    android:text="choose file"
+                    android:outlineProvider="bounds"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:id="@+id/chooseFileBtn"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No file choosen"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/fileStatusTxt"/>
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_purple"
+            android:text="Update personal details"
+            android:textAllCaps="false"
+            android:id="@+id/updatePersonalBtn"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+</LinearLayout>
