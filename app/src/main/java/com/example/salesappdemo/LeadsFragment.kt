@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.salesappdemo.adapter.LeadsAdapter
 import com.example.salesappdemo.data.ModelLeadsDataClass
 
 
@@ -25,7 +26,7 @@ class LeadsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_leads, container, false)
         val recyclerViewLeads = view.findViewById<RecyclerView>(R.id.recyclerViewLeads)
         recyclerViewLeads.layoutManager = LinearLayoutManager(requireContext())
-        recyclerViewLeads.adapter = LeadsAdapter(LeadsList)
+        recyclerViewLeads.adapter = LeadsAdapter(leadsList)
 
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
 
@@ -35,10 +36,10 @@ class LeadsFragment : Fragment() {
 
         }
 
-        val NewRecordButton: Button = view.findViewById(R.id.newRecordBtn)
-        NewRecordButton.setOnClickListener {
+        val newRecordButton: Button = view.findViewById(R.id.newRecordBtn)
+        newRecordButton.setOnClickListener {
 
-            val fragment = LeadsNewRecordFRagment()
+            val fragment = LeadsNewRecordFragment()
             loadFragment(fragment)
 
         }
@@ -46,7 +47,7 @@ class LeadsFragment : Fragment() {
         return view
     }
 
-    private val LeadsList = ArrayList<ModelLeadsDataClass>().apply {
+    private val leadsList = ArrayList<ModelLeadsDataClass>().apply {
         add(ModelLeadsDataClass("name","mmmmm@gmail.com","9043410234",
             "website","n/a","date","date","name"))
 

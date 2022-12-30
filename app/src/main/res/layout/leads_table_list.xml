@@ -10,6 +10,7 @@
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:text="Name"
+        android:gravity="center"
         android:background="@drawable/border"
         android:textSize="18sp" />
 
@@ -18,25 +19,27 @@
         android:layout_width="250dp"
         android:text="Email"
         android:background="@drawable/border"
-        android:textAlignment="center"
+        android:gravity="center"
         android:layout_height="match_parent"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/txtMobile"
         android:textAlignment="center"
-        android:layout_width="120dp"
+        android:layout_width="140dp"
         android:background="@drawable/border"
         android:layout_height="match_parent"
         android:text="Mobile"
+        android:gravity="center"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/LeadSource"
+        android:id="@+id/leadSource"
         android:layout_width="150dp"
         android:background="@drawable/border"
         android:layout_height="match_parent"
         android:text="Lead source"
+        android:gravity="center"
         android:textAlignment="center"
         android:textSize="18sp" />
 
@@ -47,6 +50,7 @@
         android:background="@drawable/border"
         android:layout_height="match_parent"
         android:text="Status"
+        android:gravity="center"
         android:textSize="18sp" />
 
     <TextView
@@ -55,6 +59,7 @@
         android:layout_width="120dp"
         android:background="@drawable/border"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:text="Created at"
         android:textSize="18sp" />
 
@@ -65,6 +70,7 @@
         android:background="@drawable/border"
         android:layout_height="match_parent"
         android:text="updated at"
+        android:gravity="center"
         android:textSize="18sp" />
 
     <TextView
@@ -74,6 +80,7 @@
         android:background="@drawable/border"
         android:layout_height="match_parent"
         android:text="Lead owner"
+        android:gravity="center"
         android:textSize="18sp" />
 
 <!--    <TextView-->

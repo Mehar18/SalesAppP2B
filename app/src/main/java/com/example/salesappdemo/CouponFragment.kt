@@ -11,7 +11,7 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.salesappdemo.adapter.CouponAdapter
 import com.example.salesappdemo.data.CouponDataBase
 import com.google.firebase.database.*
 import java.util.*

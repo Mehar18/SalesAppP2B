@@ -10,21 +10,19 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Spinner
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
-import com.example.salesappdemo.data.CouponDataBase
 import com.example.salesappdemo.data.LeadsData
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textview.MaterialTextView
 
 
-class LeadsNewRecordFRagment : Fragment() {
+class LeadsNewRecordFragment : Fragment() {
     val selectSourceArrayList: ArrayList<String> = ArrayList()
     val selectStatusArrayList: ArrayList<String> = ArrayList()
     val listData: ArrayList<LeadsData> = ArrayList()
     val listData1: ArrayList<String> = ArrayList()
-    lateinit var nameEdt:TextInputEditText
     lateinit var dataString:String
      var item:String? = null
     var textEdt:String?=null
@@ -37,8 +35,18 @@ class LeadsNewRecordFRagment : Fragment() {
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_leads_new_record_f_ragment, container, false)
         val submitButton: Button = view.findViewById(R.id.submitButton)
-        nameEdt = view.findViewById(R.id.Name)
-        api()
+//        api()
+
+        val name :MaterialTextView = view.findViewById(R.id.addEmployeeName)
+        val email:MaterialTextView = view.findViewById(R.id.addEmployeeEmail)
+        val mobileNumber:MaterialTextView = view.findViewById(R.id.addEmployeeMobileNumber)
+
+        name.text = requireArguments().get("name").toString()
+        email.text = requireArguments().get("email").toString()
+        mobileNumber.text = requireArguments().get("mobileNumber").toString()
+
+
+
 
 
         submitButton.setOnClickListener {
@@ -105,38 +113,38 @@ class LeadsNewRecordFRagment : Fragment() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
-    private fun api(){
-        val url = "https://perfectplanbportal.com/api/courses"
-        val getRequest: com.android.volley.toolbox.JsonObjectRequest = object : com.android.volley.toolbox.JsonObjectRequest(
-            Method.GET, url,null,
-            Response.Listener {
-                val LeadArray = it.getJSONArray("data")
-                for (i in 0 until LeadArray.length()){
-                    val courseObject = LeadArray.getJSONObject(i)
-                    var textTitle = courseObject.get("title").toString()
-                    item = LeadsData(textTitle).toString()
-                    listData1.add(textTitle.toString())
-                    textEdt = listData1.toString()
-                    Log.d("msg",textEdt.toString())
-
-                    nameEdt.setText(textEdt)
-
-                }
-                              },
-            Response.ErrorListener { error ->
-                Log.d("ERROR", "error => $error")
-            }
-        ) {
-            @Throws(AuthFailureError::class)
-            override fun getHeaders(): Map<String, String> {
-                val headers: MutableMap<String, String> = HashMap()
-                headers["X-Api-Key"] = "test_eperfect-hskgyujr6-85bv-sjrj-3jase80"
-                headers["X-Access-Token"] = "test_92571Bhf_JHdbj_ljm12_41d03d737da5129c665b"
-                return headers
-            }
-        }
-        activity?.applicationContext?.let { MySingleton.getInstance(it).addToRequestQueue(getRequest) }
-    }
+//    private fun api(){
+//        val url = "https://perfectplanbportal.com/api/courses"
+//        val getRequest: com.android.volley.toolbox.JsonObjectRequest = object : com.android.volley.toolbox.JsonObjectRequest(
+//            Method.GET, url,null,
+//            Response.Listener {
+//                val LeadArray = it.getJSONArray("data")
+//                for (i in 0 until LeadArray.length()){
+//                    val courseObject = LeadArray.getJSONObject(i)
+//                    var textTitle = courseObject.get("title").toString()
+//                    item = LeadsData(textTitle).toString()
+//                    listData1.add(textTitle.toString())
+//                    textEdt = listData1.toString()
+//                    Log.d("msg",textEdt.toString())
+//
+//                    nameEdt.setText(textEdt)
+//
+//                }
+//                              },
+//            Response.ErrorListener { error ->
+//                Log.d("ERROR", "error => $error")
+//            }
+//        ) {
+//            @Throws(AuthFailureError::class)
+//            override fun getHeaders(): Map<String, String> {
+//                val headers: MutableMap<String, String> = HashMap()
+//                headers["X-Api-Key"] = "test_eperfect-hskgyujr6-85bv-sjrj-3jase80"
+//                headers["X-Access-Token"] = "test_92571Bhf_JHdbj_ljm12_41d03d737da5129c665b"
+//                return headers
+//            }
+//        }
+//        activity?.applicationContext?.let { MySingleton.getInstance(it).addToRequestQueue(getRequest) }
+//    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

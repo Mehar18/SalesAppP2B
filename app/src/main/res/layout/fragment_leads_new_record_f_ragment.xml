@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LeadsNewRecordFRagment">
+    tools:context=".LeadsNewRecordFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,159 +12,197 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Add Employee"
-        android:textSize="24dp"
-        android:textStyle="bold"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:layout_marginTop="40dp">
-
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textSize="18dp"/>
+            android:layout_height="match_parent"
+            android:text="Add Employee"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxStrokeColor="#3F51B5"
-            app:boxStrokeWidth="2dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/Name"
-                android:textSize="18dp"
-                android:textColor="@color/black"
-                app:boxCornerRadiusBottomEnd="5dp"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                android:layout_marginTop="5dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Email"
-            android:textSize="18dp"/>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxStrokeColor="#3F51B5"
-            app:boxStrokeWidth="2dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/Email"
-                android:textSize="18dp"
-                android:textColor="@color/black"
-                app:boxCornerRadiusBottomEnd="5dp"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                android:layout_marginTop="5dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Mobile"
-            android:textSize="18dp"/>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxStrokeColor="#3F51B5"
-            app:boxStrokeWidth="2dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/Mobile"
-                android:textSize="18dp"
-                android:textColor="@color/black"
-                app:boxCornerRadiusBottomEnd="5dp"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                android:layout_marginTop="5dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/spinner_background"
-            android:layout_marginTop="10dp"
-            android:id="@+id/sourceSpinner"/>
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/spinner_background"
-            android:layout_marginTop="10dp"
-            android:id="@+id/selectStatusSpinner"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Remark"
-            android:textSize="18dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="40dp"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="Name"
+                android:textSize="17dp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:boxStrokeColor="#3F51B5"
-            app:boxStrokeWidth="2dp">
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/addEmployeeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="Sahil"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <!--        <com.google.android.material.textfield.TextInputLayout-->
+            <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            app:boxStrokeColor="#3F51B5"-->
+            <!--            app:boxStrokeWidth="2dp">-->
+            <!--            <com.google.android.material.textfield.TextInputEditText-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:id="@+id/Name"-->
+            <!--                android:textSize="18dp"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                app:boxCornerRadiusBottomEnd="5dp"-->
+            <!--                app:boxCornerRadiusBottomStart="5dp"-->
+            <!--                app:boxCornerRadiusTopEnd="5dp"-->
+            <!--                app:boxCornerRadiusTopStart="5dp"-->
+            <!--                android:layout_marginTop="5dp"/>-->
+            <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:padding="3dp"
+                android:text="Email"
+                android:textSize="17sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/addEmployeeEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+
+            <!--        <com.google.android.material.textfield.TextInputLayout-->
+            <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            app:boxStrokeColor="#3F51B5"-->
+            <!--            app:boxStrokeWidth="2dp">-->
+            <!--            <com.google.android.material.textfield.TextInputEditText-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:id="@+id/Email"-->
+            <!--                android:textSize="18dp"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                app:boxCornerRadiusBottomEnd="5dp"-->
+            <!--                app:boxCornerRadiusBottomStart="5dp"-->
+            <!--                app:boxCornerRadiusTopEnd="5dp"-->
+            <!--                app:boxCornerRadiusTopStart="5dp"-->
+            <!--                android:layout_marginTop="5dp"/>-->
+            <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:padding="3dp"
+                android:text="Mobile"
+                android:textSize="17sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/addEmployeeMobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+
+            <!--        <com.google.android.material.textfield.TextInputLayout-->
+            <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            app:boxStrokeColor="#3F51B5"-->
+            <!--            app:boxStrokeWidth="2dp">-->
+            <!--            <com.google.android.material.textfield.TextInputEditText-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:id="@+id/Mobile"-->
+            <!--                android:textSize="18dp"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                app:boxCornerRadiusBottomEnd="5dp"-->
+            <!--                app:boxCornerRadiusBottomStart="5dp"-->
+            <!--                app:boxCornerRadiusTopEnd="5dp"-->
+            <!--                app:boxCornerRadiusTopStart="5dp"-->
+            <!--                android:layout_marginTop="5dp"/>-->
+            <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+            <Spinner
+                android:id="@+id/sourceSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/spinner_background"
+                android:minHeight="50dp" />
+
+            <Spinner
+                android:id="@+id/selectStatusSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/spinner_background"
+                android:minHeight="50dp" />
+
+            <!--        <TextView-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginTop="5dp"-->
+            <!--            android:text="Remark"-->
+            <!--            android:textSize="18dp"/>-->
+
+            <!--        <LinearLayout-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:orientation="vertical">-->
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/remark"
-                android:textSize="18dp"
-                android:hint="Enter remark"
-                android:textColor="@color/black"
-                app:boxCornerRadiusBottomEnd="5dp"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                android:layout_marginTop="5dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="15dp"
+                app:boxStrokeColor="#3F51B5"
+                app:boxStrokeWidth="2dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:hint="Enter remark"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--        </LinearLayout>-->
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:backgroundTint="@color/dark_purple"
+                android:text="@string/submit" />
+
+
         </LinearLayout>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:backgroundTint="@color/dark_purple"
-            android:text="@string/submit"
-            android:id="@+id/submitButton"/>
-
-
-
-    </LinearLayout>
     </LinearLayout>
 
 

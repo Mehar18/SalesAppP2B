@@ -1,4 +1,4 @@
-package com.example.salesappdemo
+package com.example.salesappdemo.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.salesappdemo.AddRecordCouponFragment
+import com.example.salesappdemo.R
 import com.example.salesappdemo.data.CouponDataBase
 
 
@@ -51,7 +53,7 @@ class CouponAdapter() :RecyclerView.Adapter<CouponAdapter.RowViewHolder>() {
         holder.imgThumbStatus.setTag(R.drawable.ic_baseline_thumb_up_alt_24)
 
         holder.imgThumbStatus.setOnClickListener{
-            if (holder.imgThumbStatus.getTag() ==R.drawable.ic_baseline_thumb_up_alt_24){
+            if (holder.imgThumbStatus.getTag() == R.drawable.ic_baseline_thumb_up_alt_24){
                 holder.imgThumbStatus.setImageResource(R.drawable.ic_baseline_thumb_down_alt_24)
                 holder.imgThumbStatus.setTag(R.drawable.ic_baseline_thumb_down_alt_24)
             }else{

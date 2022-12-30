@@ -3,11 +3,9 @@ package com.example.salesappdemo
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,16 +14,13 @@ import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import com.example.salesappdemo.R.id.navigationView
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
     lateinit var drawerLayout: DrawerLayout
     lateinit var headerLayout:Layout
     lateinit var profileImg:ImageView
-    lateinit var Navigationview: NavigationView
+    lateinit var navigationView: NavigationView
     lateinit var prefManager: PrefManager
     lateinit var toolbar: Toolbar
     lateinit var checkInbtn: Button
@@ -65,7 +60,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         prefManager = PrefManager(this)
         drawerLayout = findViewById(R.id.drawerlayout)
-        Navigationview = findViewById(R.id.navigationView)
+        navigationView = findViewById(R.id.navigationView)
 
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, 0, 0
@@ -74,12 +69,13 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        Navigationview.setNavigationItemSelectedListener(this)
+        navigationView.setNavigationItemSelectedListener(this)
+
+    val header = navigationView.getHeaderView(0)
 
 
-       Navigationview.getHeaderView(0).setOnClickListener{
-
-           profileImg = findViewById(R.id.profileImage)
+//           val username:TextView = findViewById(R.id.userName)
+           profileImg = header.findViewById(R.id.profileImage)
            profileImg.setOnClickListener {
 
                val builder = AlertDialog.Builder(this)
@@ -93,9 +89,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                val profileName : TextView = view.findViewById(R.id.myProfileTxt)
                profileName.setOnClickListener{
                    builder.dismiss()
-                   val fragment = Profile_Fragment()
+                   val fragment = ProfileFragment()
                    loadFragment(fragment)
-
 
                }
 
@@ -107,7 +102,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
 
 
-    }
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 

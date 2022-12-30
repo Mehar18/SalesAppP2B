@@ -8,7 +8,7 @@ class PrefManager(context: Context) {
     private val PRIVATE_MODE = 0
     private val EMAIL = "email"
 
-    private val pref : SharedPreferences = context!!.getSharedPreferences(PREF_NAME,PRIVATE_MODE)
+    private val pref : SharedPreferences = context.getSharedPreferences(PREF_NAME,PRIVATE_MODE)
     val editor : SharedPreferences.Editor = pref.edit()
 
     fun setLogin(isLogin:Boolean){

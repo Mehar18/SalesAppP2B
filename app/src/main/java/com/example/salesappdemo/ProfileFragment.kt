@@ -1,6 +1,5 @@
 package com.example.salesappdemo
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 
 
-class Profile_Fragment : Fragment() {
+class ProfileFragment : Fragment() {
     lateinit var firstNameEdt:EditText
     lateinit var LastNameEdt:EditText
     lateinit var emailEdt:EditText
