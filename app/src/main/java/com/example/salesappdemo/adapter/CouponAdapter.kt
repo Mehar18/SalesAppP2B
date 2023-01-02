@@ -1,5 +1,6 @@
 package com.example.salesappdemo.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.salesappdemo.AddRecordCouponFragment
+import com.example.salesappdemo.EditableCouponFragment
 import com.example.salesappdemo.R
 import com.example.salesappdemo.data.CouponDataBase
 
@@ -42,7 +44,17 @@ class CouponAdapter() :RecyclerView.Adapter<CouponAdapter.RowViewHolder>() {
         holder.editImg.setOnClickListener {
 
             val activity = it.context as AppCompatActivity
-            val fragment = AddRecordCouponFragment()
+            val fragment = EditableCouponFragment()
+            val bundle = Bundle()
+            bundle.putString("type",currentPosition.type)
+            bundle.putString("code",currentPosition.code)
+            bundle.putString("amount", currentPosition.amount.toString())
+            bundle.putString("startDate",currentPosition.startDate)
+            bundle.putString("expiryDate",currentPosition.expiryBY)
+            bundle.putString("employee",currentPosition.employee)
+            bundle.putString("course",currentPosition.course)
+            fragment.arguments = bundle
+
             activity.supportFragmentManager.beginTransaction().
             replace(R.id.container,fragment).addToBackStack(null).commit()
 

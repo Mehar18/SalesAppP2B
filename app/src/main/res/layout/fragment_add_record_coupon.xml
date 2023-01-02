@@ -84,17 +84,18 @@
             app:boxStrokeColor="#3F51B5"
             app:boxStrokeWidth="2dp">
             >
+
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/AmountEdt"
-                android:textSize="18dp"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/black"
+                android:textSize="18dp"
                 app:boxCornerRadiusBottomEnd="5dp"
                 app:boxCornerRadiusBottomStart="5dp"
                 app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                android:layout_marginTop="5dp"/>
+                app:boxCornerRadiusTopStart="5dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -143,7 +144,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ExpiryDate"
+                android:id="@+id/expiryDate"
                 android:textSize="18dp"
                 android:focusable="false"
                 android:textColor="@color/black"

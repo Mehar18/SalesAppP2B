@@ -3,11 +3,13 @@ package com.example.salesappdemo
 import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.salesappdemo.adapter.CouponAdapter
 import com.example.salesappdemo.data.CouponDataBase
@@ -16,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 
 
-class AddRecordCouponFragment : Fragment() {
+class EditableCouponFragment : Fragment() {
     private lateinit var prefManager: PrefManager
     lateinit var selectedItemStringType : String
     lateinit var selectedItemStringEmployee : String
@@ -41,11 +43,44 @@ class AddRecordCouponFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_add_record_coupon, container, false)
+        val view = inflater.inflate(R.layout.editable_coupon_fragment, container, false)
         //binding = FragmentAddRecordCouponBinding.inflate(inflater,container,false)
-        val submitButton:Button = view.findViewById(R.id.submitButton)
-        val startDateEdt:TextInputEditText = view.findViewById(R.id.startDate)
-        val expiryDateEdt:TextInputEditText = view.findViewById(R.id.expiryDate)
+//        val submitButton:Button = view.findViewById(R.id.submitButton)
+        val startDateEdt:TextInputEditText = view.findViewById(R.id.startDateNew)
+        val expiryDateEdt:TextInputEditText = view.findViewById(R.id.expiryDateNew)
+
+        val code = arguments?.getString("code")
+        val amount = arguments?.getString("amount")
+        val type = arguments?.getString("type")
+        val startDate = arguments?.getString("startDate")
+        startDateEdt.setText(startDate)
+
+        val expiry = arguments?.getString("expiryDate")
+        expiryDateEdt.setText(expiry)
+
+         val employee = arguments?.getString("employee")
+
+        val course = arguments?.getString("course")
+
+//        Log.d("2one","$employee $course")
+
+
+        Log.d("type",type!!)
+//        if (code == "Percent"){
+//            typeSpinner.setSelection(1)
+//        }
+//        if (code == "Fixed"){
+//            typeSpinner.setSelection(2)
+//        }
+
+
+        val codeTxt: TextInputEditText = view.findViewById(R.id.couponCodeEdt)
+        codeTxt.setText(code)
+
+        val amountTxt: TextInputEditText = view.findViewById(R.id.amountEdtNew)
+        amountTxt.setText(amount)
+
+
 
 
 
@@ -63,46 +98,46 @@ class AddRecordCouponFragment : Fragment() {
         coursesArrayList.add("--Select--")
         coursesArrayList.add("Complete full stack development")
 
-        //submit button click
-            submitButton.setOnClickListener {
-            val fragment = CouponFragment()
-
-                //type spinner
-                val couponEdt: TextInputEditText = view.findViewById(R.id.couponCode)
-                val amountEdt: TextInputEditText = view.findViewById(R.id.amount)
-//                val startDateEdt: TextInputEditText=view.findViewById(R.id.startDate)
-//                val expiryByEdt: TextInputEditText=view.findViewById(R.id.expiryDate)
-                //employee
-                //course
-
-
-              //  val typeString = selectedItemStringType
-               // val employeeString = selectedItemStringEmployee
-                val couponString = couponEdt.text.toString()
-                val amountString = amountEdt.text.toString().toInt()
-                val startDateString=startDateEdt.text.toString()
-                val expiryDateString = expiryDateEdt.text.toString()
-                //val courseString = selectedItemStringEmployee
-               loadFragment(fragment)
-
-
-
-
-
-
-                var couponDatabase = FirebaseDatabase.getInstance().getReference("Add coupon")
-                couponDatabase.child(couponString).setValue(
-                    CouponDataBase(selectedItemStringType,couponString,amountString
-                ,startDateString,expiryDateString,selectedItemStringEmployee,selectedItemStringCourse)
-                )
+//        //submit button click
+//            submitButton.setOnClickListener {
+//            val fragment = CouponFragment()
 //
-
-
-
-
-
-
-        }
+//                //type spinner
+//                val couponEdt: TextInputEditText = view.findViewById(R.id.couponCode)
+//                val amountEdt: TextInputEditText = view.findViewById(R.id.AmountEdt)
+//                val startDateEdt: TextInputEditText=view.findViewById(R.id.startDate)
+//                val expiryByEdt: TextInputEditText=view.findViewById(R.id.ExpiryDate)
+//                //employee
+//                //course
+//
+//
+//              //  val typeString = selectedItemStringType
+//               // val employeeString = selectedItemStringEmployee
+//                val couponString = couponEdt.text.toString()
+//                val amountString = amountEdt.text.toString().toInt()
+//                val startDateString=startDateEdt.text.toString()
+//                val expiryDateString = expiryByEdt.text.toString()
+//                //val courseString = selectedItemStringEmployee
+//               loadFragment(fragment)
+//
+//
+//
+//
+//
+//
+//                var couponDatabase = FirebaseDatabase.getInstance().getReference("Add coupon")
+//                couponDatabase.child(couponString).setValue(
+//                    CouponDataBase(selectedItemStringType,couponString,amountString
+//                ,startDateString,expiryDateString,selectedItemStringEmployee,selectedItemStringCourse)
+//                )
+////
+//
+//
+//
+//
+//
+//
+//        }
 
         //type spinner
 
@@ -112,6 +147,9 @@ class AddRecordCouponFragment : Fragment() {
         )
         typeSpinner = view.findViewById(R.id.typeSpinner)
         typeSpinner.setAdapter(spinnerAdapter)
+        val selection = type
+        val spinnerPosition = spinnerAdapter.getPosition(selection)
+        typeSpinner.setSelection(spinnerPosition)
 
             typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -119,9 +157,12 @@ class AddRecordCouponFragment : Fragment() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
                 val selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedItemStringType = selectedItem
-//                Log.d("selectedItem",selectedItemString)
+
+
+
 
 
             }
@@ -134,6 +175,11 @@ class AddRecordCouponFragment : Fragment() {
         )
         val employeeSpinner : Spinner = view.findViewById(R.id.employeeSpinner)
         employeeSpinner.setAdapter(employeeSpinnerAdapter)
+        val selection2 = employee
+        Log.d("employee","$selection")
+
+        val spinnerPosition2 = employeeSpinnerAdapter.getPosition(selection2)
+        employeeSpinner.setSelection(spinnerPosition2)
         employeeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -147,6 +193,7 @@ class AddRecordCouponFragment : Fragment() {
             ) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedItemStringEmployee = selectedItem
+
             }
         }
 
@@ -158,6 +205,12 @@ class AddRecordCouponFragment : Fragment() {
         )
         val courseSpinner: Spinner = view.findViewById(R.id.courseSpinner)
         courseSpinner.setAdapter(courseSpinnerAdapter)
+        val selection3 = course
+        Log.d("employee","$selection")
+
+        val spinnerPosition3 = courseSpinnerAdapter.getPosition(selection3)
+        courseSpinner.setSelection(spinnerPosition3)
+
         courseSpinner.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -170,7 +223,7 @@ class AddRecordCouponFragment : Fragment() {
                 id: Long
             ) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
-                selectedItemStringCourse=selectedItem
+                selectedItemStringEmployee = selectedItem
             }
         }
 
