@@ -41,7 +41,6 @@
                 android:background="@drawable/border"
                 android:gravity="center_vertical"
                 android:padding="10dp"
-                android:text="Sahil"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

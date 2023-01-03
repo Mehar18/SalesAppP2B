@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.example.salesappdemo.adapter.CouponAdapter
 import com.example.salesappdemo.data.CouponDataBase
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 
@@ -24,6 +25,7 @@ class AddRecordCouponFragment : Fragment() {
     lateinit var couponAdapter: CouponAdapter
     val arrayCoupon: ArrayList<CouponDataBase> = ArrayList()
     lateinit var typeSpinner:Spinner
+    lateinit var dbReference: DatabaseReference
 
 
     val typeArrayList: ArrayList<String> = ArrayList()
@@ -46,7 +48,9 @@ class AddRecordCouponFragment : Fragment() {
         val submitButton:Button = view.findViewById(R.id.submitButton)
         val startDateEdt:TextInputEditText = view.findViewById(R.id.startDate)
         val expiryDateEdt:TextInputEditText = view.findViewById(R.id.expiryDate)
-
+        val couponEdt: TextInputEditText = view.findViewById(R.id.couponCode)
+        val amountEdt: TextInputEditText = view.findViewById(R.id.amount)
+        dbReference = FirebaseDatabase.getInstance().getReference("Add coupon")
 
 
         //array for type spinner
@@ -67,39 +71,20 @@ class AddRecordCouponFragment : Fragment() {
             submitButton.setOnClickListener {
             val fragment = CouponFragment()
 
-                //type spinner
-                val couponEdt: TextInputEditText = view.findViewById(R.id.couponCode)
-                val amountEdt: TextInputEditText = view.findViewById(R.id.amount)
-//                val startDateEdt: TextInputEditText=view.findViewById(R.id.startDate)
-//                val expiryByEdt: TextInputEditText=view.findViewById(R.id.expiryDate)
-                //employee
-                //course
 
-
-              //  val typeString = selectedItemStringType
-               // val employeeString = selectedItemStringEmployee
+                val employee = selectedItemStringEmployee
+                val type = selectedItemStringType
                 val couponString = couponEdt.text.toString()
                 val amountString = amountEdt.text.toString().toInt()
                 val startDateString=startDateEdt.text.toString()
                 val expiryDateString = expiryDateEdt.text.toString()
-                //val courseString = selectedItemStringEmployee
+                val courseString = selectedItemStringEmployee
                loadFragment(fragment)
 
+                val data = CouponDataBase(type,couponString,amountString
+                    ,startDateString,expiryDateString,employee,courseString)
 
-
-
-
-
-                var couponDatabase = FirebaseDatabase.getInstance().getReference("Add coupon")
-                couponDatabase.child(couponString).setValue(
-                    CouponDataBase(selectedItemStringType,couponString,amountString
-                ,startDateString,expiryDateString,selectedItemStringEmployee,selectedItemStringCourse)
-                )
-//
-
-
-
-
+                dbReference.child(couponString).setValue(data)
 
 
         }

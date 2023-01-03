@@ -27,12 +27,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Type"
-                android:textSize="18dp"/>
+                android:textSize="18sp"/>
 
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="50dp"
                 android:background="@drawable/spinner_background"
                 android:layout_marginTop="3dp"
                 android:id="@+id/typeSpinner"/>
@@ -41,33 +42,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Code"
-                android:textSize="18dp"/>
+                android:textSize="18sp"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/couponCodeEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="#3F51B5"
-                app:boxStrokeWidth="2dp">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/couponCodeEdt"
-                    android:textSize="18dp"
-                    android:textColor="@color/black"
-                    app:boxCornerRadiusBottomEnd="5dp"
-                    app:boxCornerRadiusBottomStart="5dp"
-                    app:boxCornerRadiusTopEnd="5dp"
-                    app:boxCornerRadiusTopStart="5dp"
-                    android:layout_marginTop="5dp"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="5dp"
+                android:background="@drawable/borderone"
+                android:gravity="center_vertical"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Amount"
                 android:layout_marginTop="3dp"
-                android:textSize="18dp"/>
+                android:textSize="18sp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -157,6 +152,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="50dp"
                 android:background="@drawable/spinner_background"
                 android:layout_marginTop="3dp"
                 android:id="@+id/employeeSpinner"/>
@@ -166,12 +162,13 @@
                 android:layout_height="wrap_content"
                 android:text="Course"
                 android:layout_marginTop="3dp"
-                android:textSize="18dp"/>
+                android:textSize="18sp"/>
 
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="50dp"
                 android:background="@drawable/spinner_background"
                 android:layout_marginTop="3dp"
                 android:id="@+id/courseSpinner"/>
@@ -179,18 +176,22 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="15dp"
                 android:backgroundTint="@color/dark_purple"
                 android:text="@string/submit"
-                android:id="@+id/submitButton"/>
+                android:id="@+id/submitButtonNew"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:backgroundTint="@color/dark_purple"
+                android:text="Delete Record"
+                android:id="@+id/deleteRecord"/>
 
         </LinearLayout>
 
     </LinearLayout>
-
-
-
-
 
 
 
