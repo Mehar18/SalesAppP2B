@@ -40,6 +40,27 @@ class LeadStatus : Fragment() {
                 "N/A","Anmol","N/A","2022-10-29"
             )
         )
+        add(LeadStatusData("A.Shophia","ashophia3@gmail.com","7200334984",
+            "Webinar","Ringing","1970-01-01 05:30:00",
+        "N/A","Anmol","N/A","2022-10-29"))
+        add(
+            LeadStatusData("Aadil","aadilkhatri97861@gmail.com","9408734222",
+                "Webinar","Switch off","1970-01-01 00:00:00",
+                "N/A","Anmol","N/A","2022-10-29"
+            )
+        )
+        add(LeadStatusData("A.Shophia","ashophia3@gmail.com","7200334984",
+            "Webinar","Ringing","1970-01-01 05:30:00",
+            "N/A","Anmol","N/A","2022-10-29"))
+        add(
+            LeadStatusData("Aadil","aadilkhatri97861@gmail.com","9408734222",
+                "Webinar","Switch off","1970-01-01 00:00:00",
+                "N/A","Anmol","N/A","2022-10-29"
+            )
+        )
+        add(LeadStatusData("A.Shophia","ashophia3@gmail.com","7200334984",
+            "Webinar","Ringing","1970-01-01 05:30:00",
+            "N/A","Anmol","N/A","2022-10-29"))
 
     }
 

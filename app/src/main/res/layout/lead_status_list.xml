@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:gravity="center_vertical"
+   >
 
     <TextView
         android:id="@+id/name"
@@ -11,7 +12,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:ems="7"
-        android:maxEms="9"
+        android:maxEms="12"
+        android:paddingStart="10dp"
         android:text="Aadil"
         android:textColor="@color/black"
         android:textSize="17sp" />
@@ -40,7 +42,6 @@
         android:id="@+id/leadSource"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
         android:ems="8"
         android:text="Webinar"
         android:gravity="center_vertical"
@@ -61,11 +62,8 @@
         android:id="@+id/followedUpDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:ems="7"
-        android:lineSpacingExtra="2dp"
-        android:text="1970-01-01 00:00:00"
+        android:text="1970-01-01\n00:00:00"
         android:textColor="@color/black"
         android:textSize="17sp" />
 
@@ -92,8 +90,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="12"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:text="N/A"
         android:textColor="@color/black"
         android:textSize="17sp" />
@@ -103,16 +99,18 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:ems="6"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:text="2022-10-29"
         android:textColor="@color/black"
         android:textSize="17sp" />
 
     <ImageView
         android:id="@+id/editImgCoupon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="15dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="15dp"
+        android:background="@color/dark_purple"
         android:src="@drawable/ic_baseline_edit_24"
        />
 

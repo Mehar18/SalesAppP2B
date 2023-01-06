@@ -1,12 +1,12 @@
 package com.example.salesappdemo.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.salesappdemo.LeadStatus
 import com.example.salesappdemo.R
 import com.example.salesappdemo.data.LeadStatusData
 
@@ -18,9 +18,29 @@ class LeadStatusAdapter(private val list: ArrayList<LeadStatusData>):RecyclerVie
         return LeadStatusViewHolder(itemView)
     }
 
+    private fun setHeaderBg(view: View) {
+        view.setBackgroundColor(Color.parseColor("#90E4DFDF"))
+    }
+
     override fun onBindViewHolder(holder: LeadStatusViewHolder, position: Int) {
        val current = list[position]
-
+//        if (position%2==0){
+//            setHeaderBg(holder.nameEdt)
+//            setHeaderBg(holder.emailIdEdt)
+//            setHeaderBg(holder.mobileNumberEdt)
+//            setHeaderBg(holder.leadStatusEdt)
+//            setHeaderBg(holder.leadSourceEdt)
+//            setHeaderBg(holder.followUpDateEdt)
+//            setHeaderBg(holder.paymentReceiptEdt)
+//            setHeaderBg(holder.assignedAtEdt)
+//            setHeaderBg(holder.assignedToEdt)
+//            setHeaderBg(holder.latestUpdateEdt)
+//            setHeaderBg(holder.paymentReceiptEdt)
+//            setHeaderBg(holder.imageEdit)
+//        }
+        if (position%2==0) {
+            holder.itemView.setBackgroundColor(Color.parseColor("#90E4DFDF"))
+        }
         holder.nameEdt.text = current.name
         holder.emailIdEdt.text = current.email
         holder.mobileNumberEdt.text = current.mobile
@@ -51,7 +71,6 @@ class LeadStatusAdapter(private val list: ArrayList<LeadStatusData>):RecyclerVie
         val latestUpdateEdt :TextView = itemView.findViewById(R.id.latestUpdated)
         val assignedAtEdt :TextView = itemView.findViewById(R.id.assignedAt)
         val imageEdit: ImageView = itemView.findViewById(R.id.editImgCoupon)
-
 
 
 
