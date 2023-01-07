@@ -11,12 +11,16 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.salesappdemo.LeadsNewRecordFragment
+import com.example.salesappdemo.LeadsEditableFragment
 import com.example.salesappdemo.R
+import com.example.salesappdemo.data.CouponDataBase
+import com.example.salesappdemo.data.LeadDataBase
 import com.example.salesappdemo.data.ModelLeadsDataClass
 
 
-class LeadsAdapter(private val leadList: ArrayList<ModelLeadsDataClass>) : RecyclerView.Adapter<LeadsAdapter.RowViewHolder>(){
+class LeadsAdapter() : RecyclerView.Adapter<LeadsAdapter.RowViewHolder>(){
+
+   private var leadList: ArrayList<LeadDataBase> = ArrayList()
 
     lateinit var mobileString: String
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RowViewHolder {
@@ -35,70 +39,27 @@ class LeadsAdapter(private val leadList: ArrayList<ModelLeadsDataClass>) : Recyc
 
 
     override fun onBindViewHolder(holder: RowViewHolder, position: Int) {
-        val rowPosition = holder.adapterPosition
-
-        if (rowPosition == 0) {
-            // Header Cells. Main Headings appear here
-            holder.apply {
-                setHeaderBg(nameTxt)
-                setHeaderBg(emailTxt)
-                setHeaderBg(mobileTxt)
-                setHeaderBg(leadSourceTxt)
-
-                setHeaderBg(statusTxt)
-                setHeaderBg(createsAtTxt)
-                setHeaderBg(updatedAtTxt)
-                setHeaderBg(leadOwnerTxt)
-                setHeaderBg(editBtn)
+        val leadsCurrentPosition = leadList[position]
+        holder.nameTxt.text = leadsCurrentPosition.name
+        holder.emailTxt.text = leadsCurrentPosition.email
+        holder.mobileTxt.text=leadsCurrentPosition.mobile
+        holder.leadSourceTxt.text=leadsCurrentPosition.leadSource
+        holder.statusTxt.text=leadsCurrentPosition.status
+        holder.createsAtTxt.text=leadsCurrentPosition.createdAt
+        holder.updatedAtTxt.text=leadsCurrentPosition.updatedAt
+        holder.leadOwnerTxt.text=leadsCurrentPosition.leadOwner
 
 
 
-
-                nameTxt.text = "Name"
-                emailTxt.text = "Email"
-                mobileTxt.text = "Mobile"
-                leadSourceTxt.text = "Lead Source"
-
-                statusTxt.text = "Status"
-                createsAtTxt.text = "Created at"
-                updatedAtTxt.text = "Updated at"
-                leadOwnerTxt.text = "Lead owner"
-                editBtn.setBackgroundResource(0)
-            }
-        } else {
-            val modal = leadList[rowPosition - 1]
-
-            holder.apply {
-                setContentBg(nameTxt)
-                setContentBg(emailTxt)
-                setContentBg(mobileTxt)
-                setContentBg(leadSourceTxt)
-
-                setContentBg(statusTxt)
-                setContentBg(createsAtTxt)
-                setContentBg(updatedAtTxt)
-                setContentBg(leadOwnerTxt)
-
-                nameTxt.text = modal.Name
-                emailTxt.text = modal.Email
-                mobileTxt.text = modal.Mobile.toString()
-                leadSourceTxt.text = modal.LeadSource
-
-                statusTxt.text = modal.Status
-                createsAtTxt.text = modal.createdAt
-                updatedAtTxt.text = modal.updatedAt
-                leadOwnerTxt.text = modal.LeadOwner
-            }
-        }
-        holder.editBtn.setOnClickListener {
-
-            val activity = it.context as AppCompatActivity
-            val fragment = LeadsNewRecordFragment()
-
-            activity.supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
-                .addToBackStack(null).commit()
-
-        }
+//        holder.editBtn.setOnClickListener {
+//
+//            val activity = it.context as AppCompatActivity
+//            val fragment = LeadsEditableFragment()
+//
+//            activity.supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
+//                .addToBackStack(null).commit()
+//
+//        }
 
 
 
@@ -111,7 +72,7 @@ class LeadsAdapter(private val leadList: ArrayList<ModelLeadsDataClass>) : Recyc
 
 
             val activity = it.context as AppCompatActivity
-            val fragment = LeadsNewRecordFragment()
+            val fragment = LeadsEditableFragment()
             val bundle = Bundle()
             bundle.putString("name",holder.nameTxt.text.toString())
             bundle.putString("email",holder.emailTxt.text.toString())
@@ -119,7 +80,6 @@ class LeadsAdapter(private val leadList: ArrayList<ModelLeadsDataClass>) : Recyc
             fragment.arguments = bundle
             activity.supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
                 .addToBackStack(null).commit()
-
 
         }
 
@@ -129,14 +89,20 @@ class LeadsAdapter(private val leadList: ArrayList<ModelLeadsDataClass>) : Recyc
     }
 
     override fun getItemCount(): Int {
-        return leadList.size + 1 // one more to add header row
+        return leadList.size // one more to add header row
     }
 
-    fun updateCoupon(update:ArrayList<ModelLeadsDataClass>){
-        leadList.clear()
-        leadList.addAll(update)
+    fun filterList(filterlist: ArrayList<LeadDataBase>) {
+
+        this.leadList = filterlist
         notifyDataSetChanged()
     }
+
+//    fun updateCoupon(update:ArrayList<ModelLeadsDataClass>){
+//        leadList.clear()
+//        leadList.addAll(update)
+//        notifyDataSetChanged()
+//    }
 
 
     class RowViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -148,7 +114,7 @@ class LeadsAdapter(private val leadList: ArrayList<ModelLeadsDataClass>) : Recyc
         val createsAtTxt: TextView = itemView.findViewById(R.id.txtCreatedAt)
         val updatedAtTxt: TextView = itemView.findViewById(R.id.txtUpdatedAt)
         val leadOwnerTxt: TextView = itemView.findViewById(R.id.txtLeadOwner)
-        var editBtn : Button = itemView.findViewById(R.id.editBtnLead)
+//        var editBtn : Button = itemView.findViewById(R.id.editBtnLead)
 
     }
 

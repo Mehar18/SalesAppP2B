@@ -2,7 +2,6 @@ package com.example.salesappdemo
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +10,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
-import com.android.volley.AuthFailureError
-import com.android.volley.Response
 import com.example.salesappdemo.data.LeadsData
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
 
 
-class LeadsNewRecordFragment : Fragment() {
+class LeadsEditableFragment : Fragment() {
     val selectSourceArrayList: ArrayList<String> = ArrayList()
     val selectStatusArrayList: ArrayList<String> = ArrayList()
     val listData: ArrayList<LeadsData> = ArrayList()
@@ -33,7 +29,7 @@ class LeadsNewRecordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_leads_new_record_f_ragment, container, false)
+        val view =  inflater.inflate(R.layout.fragment_leads_editable_fragment, container, false)
         val submitButton: Button = view.findViewById(R.id.submitButton)
 //        api()
 
@@ -56,6 +52,9 @@ class LeadsNewRecordFragment : Fragment() {
 
         //select source spinner
         selectSourceArrayList.add("--Select Source--")
+        selectSourceArrayList.add("Website")
+        selectSourceArrayList.add("Webinar")
+        selectSourceArrayList.add("Social Media")
         val selectSourceAdapter : ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,selectSourceArrayList
@@ -80,6 +79,17 @@ class LeadsNewRecordFragment : Fragment() {
 
         //select status spinner
         selectStatusArrayList.add("--Select Status--")
+        selectStatusArrayList.add("N/A")
+        selectStatusArrayList.add("Busy")
+        selectStatusArrayList.add("Closed")
+        selectStatusArrayList.add("Connected")
+        selectStatusArrayList.add("Follow up")
+        selectStatusArrayList.add("Not interested")
+        selectStatusArrayList.add("Not reachable")
+        selectStatusArrayList.add("Paid")
+        selectStatusArrayList.add("Ringing")
+        selectStatusArrayList.add("Switch off")
+        selectStatusArrayList.add("Wrong number")
         val selectStatusAdapter : ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,selectStatusArrayList
