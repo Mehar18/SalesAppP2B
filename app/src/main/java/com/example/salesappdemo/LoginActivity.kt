@@ -3,6 +3,8 @@ package com.example.salesappdemo
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
@@ -70,15 +72,51 @@ class LoginActivity : AppCompatActivity() {
 
 
         loginBtn.setOnClickListener {
+
             emailString = email.text.toString().trim()
             passwordString = password.text.toString().trim()
-            prefManager.setEmail(emailString)
-            prefManager.setPassword(passwordString)
-            prefManager.setLogin(true)
-            startActivity(Intent(this, MainActivity::class.java))
+            if (emailString.isEmpty() && passwordString.isEmpty()) {
+                email.error = "enter email"
+                password.error = "enter password"
+            } else if (!isValidEmail(emailString) && !isValidPassword(passwordString)) {
+                email.error = "enter valid email"
+                password.error = "enter valid password"
+            } else {
+                prefManager.setEmail(emailString)
+                prefManager.setPassword(passwordString)
+                prefManager.setLogin(true)
+                startActivity(Intent(this, MainActivity::class.java))
+
+            }
 
         }
     }
+
+
+    fun isValidEmail(target: CharSequence): Boolean {
+        return if (TextUtils.isEmpty(target)) {
+            //  email.error = "enter email"
+            //setErrorTextField(true)
+            false
+        } else {
+            Patterns.EMAIL_ADDRESS.matcher(target).matches()
+            //  setErrorTextField(false)
+        }
+    }
+
+
+    internal fun isValidPassword(password: String): Boolean {
+        if (password.length < 8) return false
+        if (password.filter { it.isDigit() }.firstOrNull() == null) return false
+        if (password.filter { it.isLetter() }.filter { it.isUpperCase() }
+                .firstOrNull() == null) return false
+        if (password.filter { it.isLetter() }.filter { it.isLowerCase() }
+                .firstOrNull() == null) return false
+        if (password.filter { !it.isLetterOrDigit() }.firstOrNull() == null) return false
+
+        return true
+    }
+
 
 
 

@@ -1,6 +1,8 @@
 package com.example.salesappdemo
 
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,9 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class LeadsAddRecordFragment : Fragment() {
@@ -120,18 +125,41 @@ class LeadsAddRecordFragment : Fragment() {
 
             val leadName  = name.text.toString()
             val leadEmail = email.text.toString()
+
             val mobile = mobileNumber.text.toString()
             val leadSource = selectedLeadSourceString
             val leadStatus = selectedLeadStatusString
-            val createdAt = ""
+            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd  '' HH:mm:ss ")
+            val currentDateAndTime: String = simpleDateFormat.format(Date())
+            val createdAt = currentDateAndTime
+
+//            val bundle = Bundle()
+//            bundle.putString("dateAndTime",currentDateAndTime)
+//            fragment.arguments = bundle
             val updatedAt = ""
             val leadOwner = ""
-            loadFragment(fragment)
+            if (leadEmail.isEmpty() && mobile.isEmpty()){
+                email.error = "enter email"
+                mobileNumber.error = "enter number"
+            }else if(!isValidEmail(leadEmail)&&!isValidMobile(mobile)){
+                email.error = "enter valid email"
+                mobileNumber.error="enter valid number"
+            }else {
+                loadFragment(fragment)
 
-            val leadsData = LeadDataBase(leadName,leadEmail,mobile,leadSource,leadStatus
-            ,createdAt,updatedAt,leadOwner)
+                val leadsData = LeadDataBase(
+                    leadName,
+                    leadEmail,
+                    mobile,
+                    leadSource,
+                    leadStatus,
+                    createdAt,
+                    updatedAt,
+                    leadOwner
+                )
 
-            dbReference.child(leadName).setValue(leadsData)
+                dbReference.child(leadName).setValue(leadsData)
+            }
 
 
 
@@ -144,6 +172,28 @@ class LeadsAddRecordFragment : Fragment() {
         transaction.replace(R.id.container,fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    fun isValidEmail(target: CharSequence): Boolean {
+        return if (TextUtils.isEmpty(target)) {
+            //  email.error = "enter email"
+            //setErrorTextField(true)
+            false
+        } else {
+            Patterns.EMAIL_ADDRESS.matcher(target).matches()
+            //  setErrorTextField(false)
+        }
+    }
+
+
+    private fun isValidMobile(target: CharSequence): Boolean {
+        return if (target.length != 10) {
+            false
+        } else {
+            Patterns.PHONE.matcher(target).matches()
+        }
+
+
     }
 
 }

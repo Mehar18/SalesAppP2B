@@ -10,13 +10,21 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import com.example.salesappdemo.data.CouponDataBase
+import com.example.salesappdemo.data.LeadDataBase
 import com.example.salesappdemo.data.LeadsData
 import com.google.android.material.textview.MaterialTextView
+import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class LeadsEditableFragment : Fragment() {
     val selectSourceArrayList: ArrayList<String> = ArrayList()
     val selectStatusArrayList: ArrayList<String> = ArrayList()
+    lateinit var selectedLeadSourceString:String
+    lateinit var selectedLeadStatusString:String
     val listData: ArrayList<LeadsData> = ArrayList()
     val listData1: ArrayList<String> = ArrayList()
     lateinit var dataString:String
@@ -31,6 +39,7 @@ class LeadsEditableFragment : Fragment() {
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_leads_editable_fragment, container, false)
         val submitButton: Button = view.findViewById(R.id.submitButton)
+
 //        api()
 
         val name :MaterialTextView = view.findViewById(R.id.addEmployeeName)
@@ -40,6 +49,8 @@ class LeadsEditableFragment : Fragment() {
         name.text = requireArguments().get("name").toString()
         email.text = requireArguments().get("email").toString()
         mobileNumber.text = requireArguments().get("mobileNumber").toString()
+        selectedLeadSourceString = requireArguments().get("leadSource").toString()
+        selectedLeadStatusString=requireArguments().get("leadStatus").toString()
 
 
 
@@ -47,14 +58,32 @@ class LeadsEditableFragment : Fragment() {
 
         submitButton.setOnClickListener {
             val fragment  = LeadsFragment()
+
+            val leadName  = name.text.toString()
+            val leadEmail = email.text.toString()
+            val mobile = mobileNumber.text.toString()
+            val leadSource = selectedLeadSourceString
+            val leadStatus = selectedLeadStatusString
+            val createdAtTime = arguments?.getString("createdDate")
+            val createdAt = createdAtTime.toString()
+
+            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd  '' HH:mm:ss ")
+            val currentDateAndTime: String = simpleDateFormat.format(Date())
+            val updatedAt = currentDateAndTime
+            val leadOwner = ""
+
+            updateData(leadName,leadEmail,mobile,leadSource,leadStatus,createdAt,updatedAt
+            ,leadOwner)
             loadFragment(fragment)
+
         }
 
         //select source spinner
-        selectSourceArrayList.add("--Select Source--")
-        selectSourceArrayList.add("Website")
-        selectSourceArrayList.add("Webinar")
-        selectSourceArrayList.add("Social Media")
+       selectSourceArrayList.add(selectedLeadSourceString)
+//        selectSourceArrayList.add("--Select Source--")
+//        selectSourceArrayList.add("Website")
+//        selectSourceArrayList.add("Webinar")
+//        selectSourceArrayList.add("Social Media")
         val selectSourceAdapter : ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,selectSourceArrayList
@@ -74,6 +103,9 @@ class LeadsEditableFragment : Fragment() {
                 id: Long
             ) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
+                selectedLeadSourceString = selectedItem
+
+
             }
             }
 
@@ -90,6 +122,7 @@ class LeadsEditableFragment : Fragment() {
         selectStatusArrayList.add("Ringing")
         selectStatusArrayList.add("Switch off")
         selectStatusArrayList.add("Wrong number")
+      //  selectStatusArrayList.add(selectedLeadStatusString)
         val selectStatusAdapter : ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,selectStatusArrayList
@@ -109,6 +142,7 @@ class LeadsEditableFragment : Fragment() {
                 id: Long
             ) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
+                selectedLeadStatusString = selectedItem
             }
         }
 
@@ -160,6 +194,28 @@ class LeadsEditableFragment : Fragment() {
         super.onAttach(context)
 
     }
+
+
+    private fun updateData( name: String,
+                            email : String,
+                            mobile : String,
+                            leadSource : String,
+                            status : String,
+                            createdAt : String,
+                            updatedAt : String,
+                            leadOwner : String,){
+
+        val dbReferenceLeads = FirebaseDatabase.getInstance().getReference("Add Leads").child(name)
+        val leadsUpdateData = LeadDataBase(name,
+        email,mobile,leadSource,status,createdAt,updatedAt,leadOwner)
+        dbReferenceLeads.setValue(leadsUpdateData)
+
+
+
+
+
+    }
+
 
 
 }

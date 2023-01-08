@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.salesappdemo.EditableCouponFragment
 import com.example.salesappdemo.LeadsEditableFragment
 import com.example.salesappdemo.R
 import com.example.salesappdemo.data.CouponDataBase
@@ -50,7 +51,6 @@ class LeadsAdapter() : RecyclerView.Adapter<LeadsAdapter.RowViewHolder>(){
         holder.leadOwnerTxt.text=leadsCurrentPosition.leadOwner
 
 
-
 //        holder.editBtn.setOnClickListener {
 //
 //            val activity = it.context as AppCompatActivity
@@ -77,6 +77,9 @@ class LeadsAdapter() : RecyclerView.Adapter<LeadsAdapter.RowViewHolder>(){
             bundle.putString("name",holder.nameTxt.text.toString())
             bundle.putString("email",holder.emailTxt.text.toString())
             bundle.putString("mobileNumber",holder.mobileTxt.text.toString())
+            bundle.putString("leadSource",holder.leadSourceTxt.text.toString())
+            bundle.putString("leadStatus",holder.leadStatusTxt.text.toString())
+            bundle.putString("createdDate",holder.createsAtTxt.text.toString())
             fragment.arguments = bundle
             activity.supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
                 .addToBackStack(null).commit()
@@ -114,6 +117,7 @@ class LeadsAdapter() : RecyclerView.Adapter<LeadsAdapter.RowViewHolder>(){
         val createsAtTxt: TextView = itemView.findViewById(R.id.txtCreatedAt)
         val updatedAtTxt: TextView = itemView.findViewById(R.id.txtUpdatedAt)
         val leadOwnerTxt: TextView = itemView.findViewById(R.id.txtLeadOwner)
+        val leadStatusTxt:TextView = itemView.findViewById(R.id.txtStatus)
 //        var editBtn : Button = itemView.findViewById(R.id.editBtnLead)
 
     }
