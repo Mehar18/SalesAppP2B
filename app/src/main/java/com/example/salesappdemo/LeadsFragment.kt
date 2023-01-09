@@ -1,30 +1,26 @@
 package com.example.salesappdemo
 
 import android.Manifest
+import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
+import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.salesappdemo.adapter.CouponAdapter
 import com.example.salesappdemo.adapter.LeadsAdapter
-import com.example.salesappdemo.data.CouponDataBase
 import com.example.salesappdemo.data.LeadDataBase
-import com.example.salesappdemo.data.LeadsData
-import com.example.salesappdemo.data.ModelLeadsDataClass
 import com.google.firebase.database.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class LeadsFragment : Fragment() {
@@ -32,12 +28,16 @@ class LeadsFragment : Fragment() {
     private lateinit var dbRefernceLeads : DatabaseReference
     private lateinit var recyclerViewLeads : RecyclerView
     private lateinit var mAdapter:LeadsAdapter
+    private lateinit var leadsCount:TextView
+    private lateinit var dateFilter:TextView
     val selectStatusArrayList: ArrayList<String> = ArrayList()
     lateinit var selectedLeadStatusString:String
     val selectSourceArrayList: ArrayList<String> = ArrayList()
     lateinit var selectedLeadSourceString:String
+     var fDate:String? = null
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +47,9 @@ class LeadsFragment : Fragment() {
         recyclerViewLeads.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         mAdapter= LeadsAdapter()
         recyclerViewLeads.adapter = mAdapter
+
+        leadsCount = view.findViewById(R.id.leadsCount)
+        dateFilter = view.findViewById(R.id.dateAndTime)
 
         leadsArrayList= arrayListOf<LeadDataBase>()
         getLeadsListData()
@@ -101,6 +104,7 @@ class LeadsFragment : Fragment() {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedLeadStatusString = selectedItem
                 if (selectedLeadStatusString.equals("All")){
+                    mAdapter.filterList(leadsArrayList)
 
                 }else {
                     leadsStatusFilter(selectedLeadStatusString)
@@ -139,7 +143,7 @@ class LeadsFragment : Fragment() {
                 selectedLeadSourceString = selectedItem
 
                 if (selectedLeadSourceString.equals("All")){
-
+                    mAdapter.filterList(leadsArrayList)
                 }else {
                     leadsSourceFilter(selectedLeadSourceString)
                 }
@@ -147,6 +151,47 @@ class LeadsFragment : Fragment() {
 
             }
         }
+
+
+
+        dateFilter.setOnClickListener {
+            dateFilter.setBackgroundResource(R.drawable.borderpurple)
+            val dateCalender = Calendar.getInstance()
+            val year = dateCalender.get(Calendar.YEAR)
+            val month = dateCalender.get(Calendar.MONTH)
+            val day = dateCalender.get(Calendar.DAY_OF_MONTH)
+            val datePicker = DatePickerDialog(
+                requireContext(),
+                {view, year, monthOfYear, dayOfMonth ->
+                     fDate = "$year.${monthOfYear+1}.$dayOfMonth".trim()
+                    Log.d("date",fDate.toString())
+                  //  val format = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+                  //  val simpleDateFormat =  SimpleDateFormat("yyyy.MM.dd ")
+                   //val dateTime = simpleDateFormat.format(fDate).toString();
+                    dateFilter.setText(fDate);
+                 //   val dateF = SimpleDateFormat(format,Locale.US)
+                   // val d = fDate!!.format(format)
+                 //   Log.d("mdate",d)
+                    //dateFilter.setText(d)
+
+                   // dateFilter(fDate)
+                },
+                year,
+                month,
+                day
+            )
+            datePicker.setButton(DialogInterface.BUTTON_NEGATIVE, "clear",
+                DialogInterface.OnClickListener { dialog, which ->
+                    if (which == DialogInterface.BUTTON_NEGATIVE) {
+                        dateFilter.setText("")
+                    }
+                })
+            datePicker.show()
+//            dateFilter(fDate)
+        }
+
+
+
 
 
 
@@ -193,6 +238,29 @@ class LeadsFragment : Fragment() {
         mAdapter.filterList(leadsSourceFilterList)
     }
 
+
+    private fun dateFilter(newText: String?) {
+        val dateFilterList: ArrayList<LeadDataBase> = ArrayList()
+        // Log.d("cod",couponArrayList.toString())
+
+        for (item in leadsArrayList) {
+            val firebaseDate = item.createdAt
+            val firebaseDateSubs = firebaseDate.substring(0,10)
+            Log.d("fdate",firebaseDateSubs)
+            if (firebaseDateSubs
+                    .contains(newText?.trim().toString())
+            ) {
+                dateFilterList.add(item)
+                //  Log.d("co",item.toString())
+                mAdapter.filterList(dateFilterList)
+
+            }
+//            madapter.filterList(couponFilterList)
+        }
+//        }
+        mAdapter.filterList(dateFilterList)
+    }
+
     private fun getLeadsListData() {
 
         dbRefernceLeads = FirebaseDatabase.getInstance().getReference("Add Leads")
@@ -211,6 +279,8 @@ class LeadsFragment : Fragment() {
 
 
                 }
+
+                leadsCount.setText("[Total ${leadsArrayList.size} records found]")
 
             }
 

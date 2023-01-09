@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.salesappdemo.adapter.CouponAdapter
 import com.example.salesappdemo.data.CouponDataBase
 import com.google.firebase.database.*
+import org.w3c.dom.Text
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -23,6 +25,7 @@ class CouponFragment : Fragment() {
     private lateinit var couponArrayList  : ArrayList<CouponDataBase>
     private lateinit var dbRefernceCoupon : DatabaseReference
     private lateinit var recyclerViewCoupon : RecyclerView
+    private lateinit var couponCount:TextView
     lateinit var edtImg : ImageView
 
     var codeString: String? = null
@@ -43,6 +46,11 @@ class CouponFragment : Fragment() {
 
         couponArrayList = arrayListOf<CouponDataBase>()
         getCouponListData()
+
+        couponCount = view.findViewById(R.id.couponCount)
+
+
+
 
         val addRecordButton : Button = view.findViewById(R.id.newrecordBtn)
 
@@ -112,6 +120,10 @@ class CouponFragment : Fragment() {
 
 
                 }
+
+
+                couponCount.setText("[Total ${couponArrayList.size} records found]")
+
 
             }
 

@@ -1,5 +1,7 @@
 package com.example.salesappdemo
 
+import android.app.AlertDialog
+import android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT
 import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
@@ -161,6 +163,7 @@ class AddRecordCouponFragment : Fragment() {
 
         //start date
         startDateEdt.setOnClickListener {
+            //val datepicker = DatePickerDialog(requireContext(),AlertDialog.)
             val StartDateCalender = Calendar.getInstance()
             val StartYear = StartDateCalender.get(Calendar.YEAR)
             val StartMonth = StartDateCalender.get(Calendar.MONTH)

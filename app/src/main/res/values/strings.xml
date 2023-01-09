@@ -15,5 +15,6 @@
     <string name="last_phone_call_state_key">activityLpcsKey</string>
     <string name="last_phone_call_bparty_key">activityLpbpKey</string>
     <string name="lead_status">View Assigned Leads </string>
+    <string name="Clear">Cancel </string>
     <string name="lead_status_count">[ Total %d Records Found ]</string>
 </resources>

@@ -67,7 +67,7 @@ class LeadsEditableFragment : Fragment() {
             val createdAtTime = arguments?.getString("createdDate")
             val createdAt = createdAtTime.toString()
 
-            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd  '' HH:mm:ss ")
+            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd   HH:mm:ss ")
             val currentDateAndTime: String = simpleDateFormat.format(Date())
             val updatedAt = currentDateAndTime
             val leadOwner = ""

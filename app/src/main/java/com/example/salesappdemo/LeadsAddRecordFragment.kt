@@ -129,7 +129,7 @@ class LeadsAddRecordFragment : Fragment() {
             val mobile = mobileNumber.text.toString()
             val leadSource = selectedLeadSourceString
             val leadStatus = selectedLeadStatusString
-            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd  '' HH:mm:ss ")
+            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd   HH:mm:ss ")
             val currentDateAndTime: String = simpleDateFormat.format(Date())
             val createdAt = currentDateAndTime
 

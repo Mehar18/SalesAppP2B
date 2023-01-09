@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.salesappdemo.LeadStatusEditFragment
 import com.example.salesappdemo.R
 import com.example.salesappdemo.data.LeadStatusData
 
@@ -52,6 +54,16 @@ class LeadStatusAdapter(private val list: ArrayList<LeadStatusData>):RecyclerVie
         holder.latestUpdateEdt.text = current.latestUpdate
         holder.assignedAtEdt.text = current.assignedAt
         holder.imageEdit.setImageResource(R.drawable.ic_baseline_edit_24)
+
+        holder.imageEdit.setOnClickListener {
+
+            val activity = it.context as AppCompatActivity
+            val fragment = LeadStatusEditFragment()
+
+            activity.supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
+                .addToBackStack(null).commit()
+
+        }
 
     }
 
